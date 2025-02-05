@@ -23,6 +23,7 @@ class Data
         void Add(Value record);
         void Delete(string key);
         Value LookUp(string key);
+        void printValue(Value record);
     private:
         int size;
         vector<Value> seqData;
@@ -51,11 +52,21 @@ void Data::Delete(string key)
     seqDelete(key);
 }
 
+*/
 Value Data::LookUp(string key)
 {
-    seqLookUp(key);
+    return seqLookUp(key);
 }
-*/
+
+void Data::printValue(Value record)
+{
+    cout << "Key: " << record.key << endl <<
+    "    X: " << record.gridx << endl <<
+    "    Y: " << record.gridy << endl <<
+    "Color: " << record.color << endl <<
+    "Val 1: " << record.val1 << endl <<
+    "Val 2: " << record.val2 << endl;
+}
 
 // private
 
@@ -83,10 +94,19 @@ void Data::hashDelete(string key)
 {
 }
 
+*/
 Value Data::seqLookUp(string key)
 {
+    for (int i=0;i<seqData.size();i++){
+        if (seqData[i].key == key){
+            return seqData[i];
+        }
+    }
+    cout << "Key not found in list" << endl;
+    exit(1);
 }
 
+/*
 Value Data::hashLookUp(string key)
 {
 }
@@ -153,12 +173,12 @@ int main(int argc, char *argv[])
         else if (action == "search")
         {
             getline(file, data);
-            dataObject.LookUp(data);
+            dataObject.printValue(dataObject.LookUp(data));
         }
         else if (action == "remove")
         {
-            getline(file, data);
-            dataObject.Delete(data);
+            // getline(file, data);
+            // dataObject.Delete(data);
         }
     }
     file.close();
